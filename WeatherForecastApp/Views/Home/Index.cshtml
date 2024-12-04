@@ -1,0 +1,186 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<WeatherForecastApp.Models.WeatherInfo>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<head>
+    <link rel="stylesheet" href="~/css/styles.css" />
+</head>
+
+
+<h2 class="mb-4">Hava Durumu Bilgileri</h2>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+<div class="card text-center mt-4">
+    <div class="card-header d-flex justify-content-center align-items-center position-relative">
+        <h5 class="mb-0 text-center w-100">Güncel Bilgileriniz</h5>
+        <i class="bi bi-pencil-square position-absolute end-0" style="font-size: 1.5rem; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#updateCityModal"></i>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="updateCityModal" tabindex="-1" aria-labelledby="updateCityModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateCityModalLabel">Şehir Güncelle</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Home" asp-action="UpdateCity" method="post">
+                    <div class="form-group">
+                        <label for="DefaultCityName">Yeni Şehir Adı</label>
+                        <input type="text" name="DefaultCityName" class="form-control" required />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                        <button type="submit" class="btn btn-primary">Güncelle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <div class="card-body">
+        <div class="mb-3">
+            <span>
+                <i class="bi bi-calendar" style="font-size: 1.2rem;"></i>
+                 <span id="currentDate" class="ms-2"></span>
+            </span>
+                <br />
+                <span>
+                    <i class="bi bi-clock" style="font-size: 1.2rem;"></i>
+                    <span id="currentTime" class="ms-2"></span>
+                </span>
+            </div>
+            <div class="mb-3">
+                <span>
+                    <i class="bi bi-house-door" style="font-size: 1.5rem;"></i>
+                    <span class="ms-2">@TempData["city"]</span>
+                </span>
+            </div>
+
+        @if (TempData["temp"] != null && TempData["mainStatus"] != null && TempData["iconUrl"] != null)
+        {
+           
+            <div class="mb-3">
+                <span>
+                    <i class="bi bi-thermometer-half" style="font-size: 1.5rem;"></i>
+                    <span class="ms-2">@TempData["temp"] °C</span>
+                </span>
+            </div>
+
+            <div class="mb-3">
+                <span>
+                    <span class="ms-2">@TempData["mainStatus"]</span>
+                </span>
+                <br />
+                <div class="weather-icon-container mt-2">
+                    <img src="@TempData["iconUrl"]" alt="Weather Icon" class="weather-icon" />
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="mb-3">
+                <span>
+                    <span class="ms-2">Güncel hava durumu bilgisi mevcut değil.</span>
+                </span>
+            </div>        }
+    </div>
+</div>
+
+<div class="mb-4"></div> 
+
+
+<table class="table table-hover table-striped table-bordered">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Tarih</th>
+            <th scope="col">Şehir</th>
+            <th scope="col">Sıcaklık (°C)</th>
+            <th scope="col">Hava Durumu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var weatherInfo in Model)
+            {
+                <tr>
+                    <td>@weatherInfo.WeatherDate.ToShortDateString()</td>
+                    <td>@weatherInfo.CityName</td>
+                    <td>@weatherInfo.Temperature</td>
+                    <td>@weatherInfo.MainStatus
+                        <img src="@weatherInfo.Icon" alt="Weather Icon" width="50" height="50" />
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="4" class="text-center">Hiç hava durumu bilgisi mevcut değil.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+        var currentDate = new Date();
+        var options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        var optionsTime = { hour: '2-digit', minute: '2-digit', hour12: false }; // 24 saat formatı
+        document.getElementById('currentTime').innerText = currentDate.toLocaleTimeString('tr-TR', optionsTime);
+        document.getElementById('currentDate').innerText = currentDate.toLocaleDateString('tr-TR', options);
+</script>
+<h2 class="mt-5">Haftalık Hava Durumu Grafiği</h2>
+<canvas id="weeklyWeatherChart"></canvas>
+
+@if (Model != null && Model.Any())
+{
+    <script>
+        var ctx = document.getElementById('weeklyWeatherChart').getContext('2d');
+
+        // Dinamik veri oluşturma
+        var labels = [];
+        var temperatures = [];
+
+        @foreach (var weatherInfo in Model.OrderBy(w => w.WeatherDate))
+        {
+            <text>labels.push('@weatherInfo.WeatherDate.ToShortDateString()');</text>
+            <text>temperatures.push(parseFloat('@weatherInfo.Temperature'));</text> 
+
+
+        }
+
+        var weatherData = {
+            labels: labels,
+            datasets: [{
+                label: 'Günlük Ortalama Sıcaklık',
+                data: temperatures,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 2,
+                fill: false
+            }]
+        };
+
+        var weeklyChart = new Chart(ctx, {
+            type: 'line',
+            data: weatherData
+
+        });
+         
+    </script>
+}
+else
+{
+    <p class="text-center">Hiç haftalık hava durumu bilgisi mevcut değil.</p>
+}

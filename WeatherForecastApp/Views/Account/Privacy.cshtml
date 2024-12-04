@@ -1,0 +1,64 @@
+﻿@model WeatherForecastApp.ViewModels.UserUpdateViewModel
+
+@{
+    ViewData["Title"] = "Hesap Ayarları";
+}
+
+<h2 class="text-center mb-4">@ViewData["Title"]</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success text-center">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h5>Hesap Ayarlarını Güncelle</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Account" asp-action="Privacy" method="post" novalidate>
+                        <div class="form-group mb-3">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" type="password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="PasswordAgain" class="control-label"></label>
+                            <input asp-for="PasswordAgain" type="password" class="form-control" />
+                            <span asp-validation-for="PasswordAgain" class="text-danger"></span>
+                        </div>
+                        @* <div class="form-group mb-3">
+                            <label asp-for="DefaultCityName" class="control-label"></label>
+                            <input asp-for="DefaultCityName" class="form-control" />
+                            <span asp-validation-for="DefaultCityName" class="text-danger"></span>
+                        </div> *@
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Güncelle</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <p>İptal etmek için <a asp-controller="Home" asp-action="Index">buraya tıklayın</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,15 @@
+﻿
+@model WeatherForecastApp.Models.User
+
+<h2>Profil Bilgileri</h2>
+
+<form asp-action="Update" method="post">
+    <input type="hidden" name="UserId" value="@Model.UserId" />
+    <label>Yeni Adı Girin:</label>
+    <input type="text" name="Name" value="@Model.Name" required />
+    <label>Yeni Şifrenizi Girin:</label>
+    <input type="password" name="Password" placeholder="Yeni şifre (değiştirmek için girin)" />
+    <label>Yeni Şehrinizi Girin:</label>
+    <input type="text" name="DefaultCityName" value="@Model.DefaultCityName" />
+    <button type="submit">Güncelle</button>
+</form>
