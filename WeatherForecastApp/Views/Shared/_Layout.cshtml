@@ -10,6 +10,7 @@
 </head>
 <body>
     <header>
+       
         @if (!(ViewContext.RouteData.Values["controller"].ToString() == "Account" &&
         (ViewContext.RouteData.Values["action"].ToString() == "Login" ||
         ViewContext.RouteData.Values["action"].ToString() == "Register")))
@@ -58,7 +59,10 @@
             </nav>
         }
     </header>
-    <div class="container">
+    
+
+    <div class="container-fluid">
+        
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Burcu\\Desktop\\Repositories\\WeatherForecast\\WeatherForecast\\WeatherForecastApp\\wwwroot\\images\\background.jpg",
+      "PackagePath": "staticwebassets\\images\\background.jpg"
+    },
+    {
       "Id": "C:\\Users\\Burcu\\Desktop\\Repositories\\WeatherForecast\\WeatherForecast\\WeatherForecastApp\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rjc3n0jEmbhY1ERqErsQx/4ORPv9VVTUs9mo7qNMDFE=",
+  "Hash": "4HIcoNepq5XIQFh6QMtDZ0DfOJfK4tRx91Yxz/qbkik=",
   "Source": "WeatherForecastApp",
   "BasePath": "_content/WeatherForecastApp",
   "Mode": "Default",
@@ -110,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Burcu\\Desktop\\Repositories\\WeatherForecast\\WeatherForecast\\WeatherForecastApp\\wwwroot\\images\\background.jpg",
+      "SourceId": "WeatherForecastApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Burcu\\Desktop\\Repositories\\WeatherForecast\\WeatherForecast\\WeatherForecastApp\\wwwroot\\",
+      "BasePath": "_content/WeatherForecastApp",
+      "RelativePath": "images/background.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\background.jpg"
     },
     {
       "Identity": "C:\\Users\\Burcu\\Desktop\\Repositories\\WeatherForecast\\WeatherForecast\\WeatherForecastApp\\wwwroot\\js\\site.js",

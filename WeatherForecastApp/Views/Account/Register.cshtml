@@ -1,37 +1,44 @@
 ﻿@model WeatherForecastApp.ViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Kayıt Ol";
 
-<h2 class="text-center">Kayıt Ol</h2>
+}
+<div class="auth-page">
+    <div class="auth-form-container">
+        <h2 class="text-center">@ViewData["Title"]</h2>
 
-<form method="post" asp-action="Register" id="registerForm" class="container mt-4">
-    <div class="form-group">
-        <label for="UserName">Kullanıcı Adı*</label>
-        <input asp-for="UserName" class="form-control" required />
-        <span asp-validation-for="UserName" class="text-danger"></span>
+        <form method="post" asp-action="Register" id="registerForm" class="container mt-4">
+            <div class="form-group">
+                <label for="UserName">Kullanıcı Adı*</label>
+                <input asp-for="UserName" class="form-control" required />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Password">Şifre*</label>
+                <input asp-for="Password" type="password" class="form-control" required />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="ConfirmPassword">Şifreyi Onayla*</label>
+                <input asp-for="ConfirmPassword" type="password" class="form-control" required />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Name">Adı Soyadı*</label>
+                <input asp-for="Name" class="form-control" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="DefaultCityName">Varsayılan Şehir*</label>
+                <input asp-for="DefaultCityName" class="form-control" placeholder="Örneğin: İstanbul" />
+                <span asp-validation-for="DefaultCityName" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Kayıt Ol</button>
+        </form>
+        <div class="text-center mt-3">
+            <p>Hesabınız var mı? <a asp-action="Login">Giriş Yapın</a></p>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="Password">Şifre*</label>
-        <input asp-for="Password" type="password" class="form-control" required />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="ConfirmPassword">Şifreyi Onayla*</label>
-        <input asp-for="ConfirmPassword" type="password" class="form-control" required />
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="Name">Adı Soyadı*</label>
-        <input asp-for="Name" class="form-control" required />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="DefaultCityName">Varsayılan Şehir*</label>
-        <input asp-for="DefaultCityName" class="form-control" placeholder="Örneğin: İstanbul" />
-        <span asp-validation-for="DefaultCityName" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary btn-block">Kayıt Ol</button>
-</form>
-<div class="text-center mt-3">
-    <p>Hesabınız var mı? <a asp-action="Login">Giriş Yapın</a></p>
 </div>
 
 @section Scripts {
